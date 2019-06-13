@@ -83,10 +83,16 @@ box.text(points);
 				// TODO 4 / 5
 				points += 1;
 				box.text(points);
-				position = 0;
+				
 				speed += 3;
+				randomlyPositionBox();
 			};
 
+			function randomlyPositionBox() {
+				var randNum = Math.random() * boardWidth;
+				console.log(randNum);
+				position = randNum;
+			}
 
 			//this executes the update function code every 50 milliseconds
 			setInterval(update, 50);
