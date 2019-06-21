@@ -8,7 +8,12 @@ var init = function(window) {
         canvas = app.canvas,
         view = app.view,
         fps = draw.fps('#000');
+        
+        function changeBackground(color) {
+    document.body.style.background = color;
+}
 
+window.addEventListener("load",function() { changeBackground('grey'); });
 
     window.opspark.makeGame = function() {
 
@@ -18,7 +23,7 @@ var init = function(window) {
         ////////////////////////////////////////////////////////////////
         // ALL CODE GOES BELOW HERE                                   //
         ////////////////////////////////////////////////////////////////
-
+        
         // TODO 1 : Declare and initialize our variables //
         var circle;
         var circles = [];
@@ -32,11 +37,9 @@ var init = function(window) {
         }
 
         // TODO 3 : Call the drawCircle function 5 times //
-        drawCircle();
-        drawCircle();
-        drawCircle();
-        drawCircle();
-        drawCircle();
+        for (var dC = 0; dC < 100; dC++) {
+            drawCircle();
+        }
 
         // TODO 7 : Create a Loop to call drawCircle 100 times
 
@@ -53,15 +56,15 @@ var init = function(window) {
             }
             // TODO 5a) if the circle has gone past of the LEFT side of the screen then place it on the RIGHT
             else if (circle.x < 0) {
-                circle.x = 0;
+                circle.x = canvas.width;
             }
 
             // TODO 5b) if the circle has gone past of the TOP side of the screen then place it on the BOTTOM
-            if (circle.y > canvas.height) {
-                circle.y = 0;
+            else if (circle.y < 0) {
+                circle.y = canvas.height;
             }
             // TODO 5c) if the circle has gone past of the BOTTOM side of the screen then place it OFF-SCREEN TOP
-            else if (circle.y < 0) {
+            if (circle.y > canvas.height) {
                 circle.y = 0;
             }
             // YOUR TODO 5 CODE ENDS HERE //////////////////////////
@@ -69,11 +72,10 @@ var init = function(window) {
 
         function update() {
             // TODO 4 : Update the circle's position //
-            for (var i = 0; i < 5; i++) {
+            for (var i = 0; i < circles.length; i++) {
                 physikz.updatePosition(circles[i]);
                 game.checkCirclePosition(circles[i]);
             }
-}
 
 
             // TODO 8 : Iterate over the array
@@ -92,7 +94,7 @@ var init = function(window) {
 
         app.addUpdateable(window.opspark.game);
     };
-}
+};
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
 if ((typeof process !== 'undefined') &&
